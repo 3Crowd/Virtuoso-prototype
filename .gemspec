@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.summary	= "A protoype for managing virtualbox VMs, scripts VBoxManage"
   s.description = "A quick and dirty prototype for managing virtualbox virtual machines, only scripts VBoxManage to eliminate bringup of a raw VM"
 
+  s.add_dependency('virtualbox', '>=0.7.5')
   s.required_rubygems_version	= ">= 1.3.6"
 
   s.files	= Dir.glob("{bin,lib}/**/*") + %w(LICENSE README)
