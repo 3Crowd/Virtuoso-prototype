@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name	= "virtuoso-prototype"
   s.version	= "0.0.2"
   s.platform	= Gem::Platform::RUBY
-  s.authors	= ["Justin Lynn"]
+  s.authors	= ["3Crowd Technologies, Inc.", "Justin Lynn"]
   s.email	= ["eng@3crowd.com"]
   s.homepage	= "http://github.com/3Crowd/Virtuoso-prototype"
   s.summary	= "A protoype for managing virtualbox VMs, scripts VBoxManage"
