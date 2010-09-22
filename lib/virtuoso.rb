@@ -21,15 +21,15 @@ class CLI
     setup_cli_arguments!
     options = parse_arguments(arguments)
     ensure_virtualbox_installed
-    perform_action!(options[:operation], options[:vm_name])
+    perform_action!(options[:operation], options[:vm_name], options[:bond_interface])
   end
 
   private
 
-  def perform_action!(operation, vm_name)
+  def perform_action!(operation, vm_name, bond_interface)
     case operation
       when 'create' then
-        @vm_interface.create!(vm_name)
+        @vm_interface.create!(vm_name, bond_interface)
       when 'destroy' then
         @vm_interface.destroy!(vm_name, :delete)
       else
@@ -60,6 +60,12 @@ class CLI
         short '-n'
         long '--vmname=VMNAME'
         desc 'The virtual machine you wish to operate on (required)'
+      end
+
+      option :bond_interface, :required => true do
+        short '-i'
+        long '--bond_interface=INTERFACE0'
+        desc 'The network interface on the host machine to which the virtual network interface should bond'
       end
     end
   end
