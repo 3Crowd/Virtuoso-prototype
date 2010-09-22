@@ -1,2 +1,3 @@
 README for Virtuoso prototype
 =============================
+Requires: virtualbox, systemu, logger, uuid, choice
