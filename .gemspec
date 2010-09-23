@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name	= "virtuoso-prototype"
-  s.version	= "0.0.2"
+  s.version	= "0.0.3"
   s.platform	= Gem::Platform::RUBY
   s.authors	= ["3Crowd Technologies, Inc.", "Justin Lynn"]
   s.email	= ["eng@3crowd.com"]
