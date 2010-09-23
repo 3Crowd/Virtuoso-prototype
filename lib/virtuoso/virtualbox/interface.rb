@@ -44,7 +44,7 @@ module VirtualBox
       @log.debug("Standard err: " + stderr)
       # Reload the vm config, to pick up command line changes
       vm.reload
-      vm.network_interfaces[interface_number-1]
+      vm.network_adapters[interface_number-1]
     end
 
     def add_storage_controller!(vm)
