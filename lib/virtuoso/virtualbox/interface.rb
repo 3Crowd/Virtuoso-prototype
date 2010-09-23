@@ -38,7 +38,7 @@ module VirtualBox
     private
 
     def add_bridged_network_interface!(vm, interface_number, bridge_interface)
-      status, stdout, stderr = systemu "VBoxManage modifyvm --nic#{interface_number} bridged --bridgeadapter#{interface_number} #{bridge_interface}"
+      status, stdout, stderr = systemu "VBoxManage modifyvm #{vm.uuid} --nic#{interface_number} bridged --bridgeadapter#{interface_number} #{bridge_interface}"
       @log.debug("Ran VBoxManage add network interface: output (#{status}):")
       @log.debug("Standard out: " + stdout)
       @log.debug("Standard err: " + stderr)
