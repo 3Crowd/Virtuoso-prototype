@@ -42,7 +42,7 @@ module VirtualBox
       @log.debug("Ran VBoxManage add network interface: output (#{status}):")
       @log.debug("Standard out: " + stdout)
       @log.debug("Standard err: " + stderr)
-      @ Reload the vm config, to pick up command line changes
+      # Reload the vm config, to pick up command line changes
       vm.reload
       vm.network_interfaces[interface_number-1]
     end

@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.add_dependency('virtualbox', '>=0.7.5')
   s.add_dependency('choice', '>=0.1.4')
   s.add_dependency('systemu', '>=1.2.0')
+  s.add_dependency('uuid', '>=2.3.1')
   s.required_rubygems_version	= ">= 1.3.6"
 
   s.files	= Dir.glob("{bin,lib}/**/*") + %w(LICENSE README CHANGELOG)
