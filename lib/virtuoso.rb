@@ -21,15 +21,15 @@ class CLI
     setup_cli_arguments!
     options = parse_arguments(arguments)
     ensure_virtualbox_installed
-    perform_action!(options[:operation], options[:vm_name], options[:bond_interface])
+    perform_action!(options[:operation], options[:vm_name], options[:bond_interface], options[:disk_size])
   end
 
   private
 
-  def perform_action!(operation, vm_name, bond_interface)
+  def perform_action!(operation, vm_name, bond_interface, disk_size)
     case operation
       when 'create' then
-        @vm_interface.create!(vm_name, bond_interface)
+        @vm_interface.create!(vm_name, bond_interface, disk_size)
       when 'destroy' then
         @vm_interface.destroy!(vm_name, :delete)
       else
@@ -67,6 +67,15 @@ class CLI
         long '--bond_interface=INTERFACE0'
         desc 'The network interface on the host machine to which the virtual network interface should bond'
       end
+
+      option :disk_size do
+        short '-d'
+        long '--disk_size=MEGABYTES'
+        desc 'The size of the virtual disk allocated to the virtualmachine in megabytes'
+        cast Integer
+        default 8000
+      end
+
     end
   end
 

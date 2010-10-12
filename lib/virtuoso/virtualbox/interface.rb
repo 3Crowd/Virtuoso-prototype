@@ -15,12 +15,12 @@ module VirtualBox
       @virtualbox[:version] = ::VirtualBox.version
     end
 
-    def create!(vm_name, bond_interface)
+    def create!(vm_name, bond_interface, disk_size)
       vm = create_vm!(vm_name)
       vm = setup_vm!(vm)
       vm.reload
       storage_controller = add_storage_controller!(vm)
-      disk = create_disk!(vm_name)
+      disk = create_disk!(vm_name, disk_size)
       attach_disk!(vm, storage_controller, disk)
       add_bridged_network_interface!(vm, 1, bond_interface)
     end
@@ -90,11 +90,11 @@ module VirtualBox
       end
     end
 
-    def create_disk!(disk_name)
+    def create_disk!(disk_name, disk_size)
       disk = ::VirtualBox::HardDrive.new
       disk.format = "VDI"
       disk.location = "#{disk_name}.vdi"
-      disk.logical_size = 8000 # in megabytes
+      disk.logical_size = disk_size # in megabytes
       if disk.save
         return disk
       else
