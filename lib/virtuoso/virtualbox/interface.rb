@@ -23,6 +23,7 @@ module VirtualBox
       disk = create_disk!(vm_name, disk_size)
       attach_disk!(vm, storage_controller, disk)
       add_bridged_network_interface!(vm, 1, bond_interface)
+      set_boot_order!(vm)
     end
 
     def destroy!(vm_name, physically_delete_media=true)
@@ -37,14 +38,20 @@ module VirtualBox
 
     private
 
+    def set_boot_order!(vm)
+      vm.boot_order = [:network, :floppy, :dvd, :hard_disk]
+      vm.save
+      vm
+    end
+
     def add_bridged_network_interface!(vm, interface_number, bridge_interface)
-      status, stdout, stderr = systemu "VBoxManage modifyvm --nic#{interface_number} bridged --bridgeadapter#{interface_number} #{bridge_interface}"
+      status, stdout, stderr = systemu "VBoxManage modifyvm #{vm.uuid} --nic#{interface_number} bridged --bridgeadapter#{interface_number} #{bridge_interface}"
       @log.debug("Ran VBoxManage add network interface: output (#{status}):")
       @log.debug("Standard out: " + stdout)
       @log.debug("Standard err: " + stderr)
-      @ Reload the vm config, to pick up command line changes
+      # Reload the vm config, to pick up command line changes
       vm.reload
-      vm.network_interfaces[interface_number-1]
+      vm.network_adapters[interface_number-1]
     end
 
     def add_storage_controller!(vm)
